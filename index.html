@@ -1,1 +1,932 @@
+<!DOCTYPE html>
+<html lang="en" class="light"> <!-- Default to light mode -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Asesro - Your Premium AI Co-Pilot</title>
+    <meta name="description" content="AI Asesro is your smart AI co-founder platform to automate tasks, analyze insights, and accelerate business growth for solopreneurs." />
+  <meta name="keywords" content="AI, AI startup, solopreneur, business automation, task management, AI co-founder, AI assistant" />
+  <meta name="author" content="AI Asesro Team" />
+  <meta name="robots" content="index, follow" />
 
+  <!-- Open Graph for social sharing -->
+<meta property="og:title" content="AI Asesro - Your Premium AI Co-Pilot" />
+<meta property="og:description" content="Launch smarter. Automate tasks, write emails, analyze data, and grow with your AI co-founder." />
+<meta property="og:url" content="https://ai-asesro.in" />
+<meta property="og:type" content="website" />
+<meta property="og:image" content="https://ai-asesro.in/preview-img.png" />
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="AI Asesro - Your Premium AI Co-Pilot" />
+<meta name="twitter:description" content="Your smart AI assistant that handles business tasks while you scale." />
+<meta name="twitter:image" content="https://ai-asesro.in/preview-img.png" />
+
+
+  <!-- Favicon -->
+  <link rel="icon" href="/favicon.ico" />
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden; /* Prevent horizontal scroll due to animations */
+            transition: background-color 0.5s ease, color 0.5s ease; /* Smooth transition for theme change */
+        }
+
+        /* Custom gradient background animation for hero section */
+        .hero-gradient-bg {
+            background: linear-gradient(135deg, #667eea, #764ba2, #667eea);
+            background-size: 400% 400%;
+            animation: gradientAnimation 15s ease infinite;
+            position: relative; /* Needed for pseudo-element */
+            overflow: hidden; /* Ensure particles stay within */
+        }
+
+        /* Hero background particles/grid effect */
+        .hero-gradient-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(circle at 10% 20%, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%);
+            background-size: 200% 200%;
+            animation: particle-move 20s linear infinite;
+            z-index: 0;
+            opacity: 0.8;
+        }
+
+        @keyframes particle-move {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 200% 200%; }
+        }
+
+        /* Dark mode specific gradient */
+        html.dark .hero-gradient-bg {
+            background: linear-gradient(135deg, #1a202c, #2d3748, #1a202c); /* Darker shades for dark mode */
+            background-size: 400% 400%;
+        }
+        html.dark .hero-gradient-bg::before {
+            background-image: radial-gradient(circle at 10% 20%, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.1) 100%);
+        }
+
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Card hover effect */
+        .card-hover-effect {
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+        }
+        .card-hover-effect:hover {
+            transform: translateY(-8px) scale(1.02); /* Added scale */
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        html.dark .card-hover-effect:hover {
+            box-shadow: 0 20px 25px -5px rgba(255, 255, 255, 0.05), 0 10px 10px -5px rgba(255, 255, 255, 0.02);
+        }
+
+        /* Button hover effect */
+        .btn-primary {
+            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #5a67d8; /* Darker shade of indigo */
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        html.dark .btn-primary:hover {
+            box-shadow: 0 10px 15px -3px rgba(255, 255, 255, 0.1), 0 4px 6px -2px rgba(255, 255, 255, 0.05);
+        }
+
+        /* Scroll animation classes */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px); /* Increased initial translation */
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out; /* Slower transition */
+        }
+        .fade-in.appear {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Hero image floating animation */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* Hero headline pulse/glow animation */
+        @keyframes text-glow {
+            0% { text-shadow: 0 0 5px rgba(255,255,255,0.3); }
+            50% { text-shadow: 0 0 15px rgba(255,255,255,0.7); }
+            100% { text-shadow: 0 0 5px rgba(255,255,255,0.3); }
+        }
+        .animate-text-glow {
+            animation: text-glow 4s ease-in-out infinite;
+        }
+
+        /* Card scale-in on load animation */
+        .card-scale-in {
+            opacity: 0;
+            transform: scale(0.9);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .card-scale-in.appear {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Social icon bounce animation */
+        @keyframes bounce-sm {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+        .social-icon-bounce:hover {
+            animation: bounce-sm 0.3s ease-in-out;
+        }
+
+        /* Icon pulse animation */
+        @keyframes icon-pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .icon-pulse-on-appear.appear i {
+            animation: icon-pulse 1s ease-out;
+        }
+
+        /* General background and text transitions for dark mode */
+        html.light body {
+            background-color: #f9fafb; /* bg-gray-50 */
+            color: #374151; /* text-gray-800 */
+        }
+        html.dark body {
+            background-color: #1a202c; /* Equivalent to bg-gray-900 */
+            color: #e2e8f0; /* Equivalent to text-gray-200 */
+        }
+        html.dark .bg-white { background-color: #2d3748; } /* bg-gray-800 */
+        html.dark .text-gray-800 { color: #e2e8f0; } /* text-gray-200 */
+        html.dark .text-gray-600 { color: #a0aec0; } /* text-gray-400 */
+        html.dark .text-gray-900 { color: #edf2f7; } /* text-gray-100 */
+        html.dark .shadow-sm { box-shadow: 0 1px 2px 0 rgba(255, 255, 255, 0.05); }
+        html.dark .shadow-lg { box-shadow: 0 10px 15px -3px rgba(255, 255, 255, 0.1), 0 4px 6px -2px rgba(255, 255, 255, 0.05); }
+        html.dark .shadow-xl { box-shadow: 0 20px 25px -5px rgba(255, 255, 255, 0.1), 0 10px 10px -5px rgba(255, 255, 255, 0.04); }
+        html.dark .shadow-md { box-shadow: 0 4px 6px -1px rgba(255, 255, 255, 0.1), 0 2px 4px -1px rgba(255, 255, 255, 0.06); }
+
+        /* Specific dark mode adjustments for sections */
+        html.dark #power-automation { background-color: #1a202c; }
+        html.dark #features { background-color: #2d3748; }
+        html.dark #how-it-works { background-color: #1a202c; }
+        html.dark #why-choose-us { background-color: #2d3748; }
+        html.dark #why-choose-us .bg-white { background-color: #4a5568; } /* bg-gray-700 for counters */
+        html.dark #use-cases { background-color: #1a202c; }
+        html.dark #testimonials { background-color: #2d3748; }
+        html.dark #testimonials .bg-gray-100 { background-color: #4a5568; } /* bg-gray-700 */
+        html.dark #testimonials .text-gray-700 { color: #e2e8f0; }
+        html.dark #testimonials .text-gray-600 { color: #a0aec0; }
+        html.dark #faq { background-color: #1a202c; } /* New FAQ section */
+        html.dark .faq-item-header { background-color: #2d3748; } /* FAQ header */
+        html.dark .faq-item-content { background-color: #2d3748; } /* FAQ content */
+        html.dark #ai-demo-section { background-color: #2d3748; } /* AI Demo section */
+        html.dark #ai-demo-output { background-color: #1a202c; border-color: #4a5568; }
+
+        /* Testimonial Carousel styles */
+        .testimonial-carousel {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+        }
+        .testimonial-wrapper {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        .testimonial-card {
+            flex: 0 0 100%; /* Each card takes full width */
+            padding: 2rem;
+            text-align: center;
+        }
+        .carousel-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 10;
+            transition: background-color 0.3s ease;
+        }
+        .carousel-button:hover {
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+        .carousel-button.left { left: 10px; }
+        .carousel-button.right { right: 10px; }
+        html.dark .carousel-button { background-color: rgba(255, 255, 255, 0.2); }
+        html.dark .carousel-button:hover { background-color: rgba(255, 255, 255, 0.3); }
+
+        /* Carousel dots */
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+        .dot {
+            width: 10px;
+            height: 10px;
+            background-color: #cbd5e0; /* light gray */
+            border-radius: 50%;
+            margin: 0 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        .dot.active {
+            background-color: #4f46e5; /* indigo-600 */
+            transform: scale(1.2);
+        }
+        html.dark .dot { background-color: #4a5568; }
+        html.dark .dot.active { background-color: #6366f1; }
+
+
+        /* Back to top button */
+        #back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #4f46e5; /* indigo-600 */
+            color: white;
+            padding: 15px;
+            border-radius: 50%;
+            display: none; /* Hidden by default */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        #back-to-top.show {
+            display: block;
+            animation: fadeInScale 0.3s ease-out;
+        }
+        @keyframes fadeInScale {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* AI Demo typing animation */
+        .typing-animation::after {
+            content: '|';
+            animation: blink-caret 0.75s step-end infinite;
+        }
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: currentColor; }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 transition-colors duration-500">
+
+    <!-- Header -->
+    <header class="sticky top-0 z-50 py-4 px-6 md:px-12 bg-white shadow-sm transition-all duration-300">
+        <nav class="container mx-auto flex justify-between items-center">
+            <a href="#" class="text-2xl font-extrabold text-indigo-700 rounded-md p-2">AI Asesro</a>
+            <div class="hidden md:flex space-x-8 items-center">
+                <a href="#features" class="text-gray-600 hover:text-indigo-700 transition duration-300 rounded-md p-2 dark:text-gray-400 dark:hover:text-white">Features</a>
+                <a href="#how-it-works" class="text-gray-600 hover:text-indigo-700 transition duration-300 rounded-md p-2 dark:text-gray-400 dark:hover:text-white">How It Works</a>
+                <a href="#why-choose-us" class="text-gray-600 hover:text-indigo-700 transition duration-300 rounded-md p-2 dark:text-gray-400 dark:hover:text-white">Why Choose Us?</a>
+                <a href="#use-cases" class="text-gray-600 hover:text-indigo-700 transition duration-300 rounded-md p-2 dark:text-gray-400 dark:hover:text-white">Use Cases</a>
+                <a href="#testimonials" class="text-gray-600 hover:text-indigo-700 transition duration-300 rounded-md p-2 dark:text-gray-400 dark:hover:text-white">Testimonials</a>
+                <a href="#faq" class="text-gray-600 hover:text-indigo-700 transition duration-300 rounded-md p-2 dark:text-gray-400 dark:hover:text-white">FAQ</a>
+                
+                <a href="waiting.html" class="bg-indigo-600 text-white px-6 py-3 rounded-full font-semibold btn-primary shadow-lg dark:bg-indigo-700 dark:hover:bg-indigo-600">Get Started Free</a>
+                <!-- Dark Mode Toggle Button -->
+                <button id="theme-toggle" class="text-gray-600 dark:text-gray-400 text-2xl ml-4 focus:outline-none">
+                    <i class="fas fa-moon hidden dark:block"></i>
+                    <i class="fas fa-sun block dark:hidden"></i>
+                </button>
+            </div>
+            <!-- Mobile Menu Button -->
+            <div class="flex items-center md:hidden">
+                <button id="mobile-menu-button" class="text-gray-600 dark:text-gray-400 focus:outline-none mr-4">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+                <!-- Dark Mode Toggle Button for Mobile -->
+                <button id="theme-toggle-mobile" class="text-gray-600 dark:text-gray-400 text-2xl focus:outline-none">
+                    <i class="fas fa-moon hidden dark:block"></i>
+                    <i class="fas fa-sun block dark:hidden"></i>
+                </button>
+            </div>
+        </nav>
+        <!-- Mobile Menu Overlay -->
+        <div id="mobile-menu" class="hidden md:hidden fixed inset-0 bg-white bg-opacity-95 dark:bg-gray-900 dark:bg-opacity-95 z-20 flex flex-col items-center justify-center space-y-8 transition-colors duration-500">
+            <button id="close-mobile-menu" class="absolute top-6 right-6 text-gray-600 dark:text-gray-400 focus:outline-none">
+                <i class="fas fa-times text-3xl"></i>
+            </button>
+            <a href="#features" class="text-3xl text-gray-800 hover:text-indigo-700 transition duration-300 dark:text-gray-200 dark:hover:text-white" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Features</a>
+            <a href="#how-it-works" class="text-3xl text-gray-800 hover:text-indigo-700 transition duration-300 dark:text-gray-200 dark:hover:text-white" onclick="document.getElementById('mobile-menu').classList.add('hidden')">How It Works</a>
+            <a href="#why-choose-us" class="text-3xl text-gray-800 hover:text-indigo-700 transition duration-300 dark:text-gray-200 dark:hover:text-white" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Why Choose Us?</a>
+            <a href="#use-cases" class="text-3xl text-gray-800 hover:text-indigo-700 transition duration-300 dark:text-gray-200 dark:hover:text-white" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Use Cases</a>
+            <a href="#testimonials" class="text-3xl text-gray-800 hover:text-indigo-700 transition duration-300 dark:text-gray-200 dark:hover:text-white" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Testimonials</a>
+            <a href="#faq" class="text-3xl text-gray-800 hover:text-indigo-700 transition duration-300 dark:text-gray-200 dark:hover:text-white" onclick="document.getElementById('mobile-menu').classList.add('hidden')">FAQ</a>
+            <a href="#ai-demo-section" class="text-3xl text-gray-800 hover:text-indigo-700 transition duration-300 dark:text-gray-200 dark:hover:text-white" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Live Demo</a>
+            <a href="waiting.html" class="bg-indigo-600 text-white px-8 py-4 rounded-full text-xl font-semibold btn-primary shadow-lg dark:bg-indigo-700 dark:hover:bg-indigo-600" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Get Started Free</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-gradient-bg relative text-white py-24 md:py-32 overflow-hidden">
+        <div class="container mx-auto text-center px-6 relative z-10 fade-in">
+            <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-6 animate-text-glow">
+                AI Asesro: Your Premium AI Co-Pilot for Unparalleled Efficiency.
+            </h1>
+            <p class="text-lg md:text-xl mb-10 max-w-3xl mx-auto opacity-90">
+                Experience seamless automation, intelligent insights, and effortless productivity across all your tasks.
+            </p>
+            <a href="waiting.html" class="bg-white text-indigo-700 px-9 py-5 rounded-full text-lg font-bold shadow-xl hover:bg gray-100 transition duration-300 btn-primary">
+                Get Started Free
+            </a>
+            
+
+            <!-- Subtle AI icon animation -->
+            <div class="absolute bottom-0 left-1/2 -translate-x-1/2 mb-8 hidden md:block">
+                <i class="fas fa-robot text-7xl text-white opacity-20 animate-float"></i>
+            </div>
+            <!-- Scroll down indicator -->
+            <div class="absolute bottom-4 left-1/2 -translate-x-1/2 animate-bounce hidden md:block">
+                <i class="fas fa-chevron-down text-white text-3xl opacity-70"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- Body Section 1: The Power of Full Automation -->
+    <section class="py-20 bg-gray-50 dark:bg-gray-900 transition-colors duration-500" id="power-automation">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-8 fade-in dark:text-gray-200">Unlock True Productivity with Intelligent Automation.</h2>
+            <p class="text-lg text-gray-600 max-w-4xl mx-auto mb-12 fade-in dark:text-gray-400">
+                Our AI Asesro goes beyond simple tasks, providing truly automated solutions that learn and adapt to your unique needs,
+                freeing you to focus on what truly matters.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <div class="p-8 bg-white rounded-xl shadow-lg card-hover-effect fade-in card-scale-in icon-pulse-on-appear dark:bg-gray-800 dark:text-gray-200">
+                    <i class="fas fa-clock text-5xl text-indigo-600 mb-6"></i>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3 dark:text-gray-100">Time Savings</h3>
+                    <p class="text-gray-600 dark:text-gray-400">Automate repetitive tasks and reclaim countless hours in your day.</p>
+                </div>
+                <div class="p-8 bg-white rounded-xl shadow-lg card-hover-effect fade-in card-scale-in icon-pulse-on-appear dark:bg-gray-800 dark:text-gray-200">
+                    <i class="fas fa-shield-alt text-5xl text-indigo-600 mb-6"></i>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3 dark:text-gray-100">Error Reduction</h3>
+                    <p class="text-gray-600 dark:text-gray-400">Minimize human error with precise, AI-driven execution of workflows.</p>
+                </div>
+                <div class="p-8 bg-white rounded-xl shadow-lg card-hover-effect fade-in card-scale-in icon-pulse-on-appear dark:bg-gray-800 dark:text-gray-200">
+                    <i class="fas fa-lightbulb text-5xl text-indigo-600 mb-6"></i>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3 dark:text-gray-100">Increased Efficiency</h3>
+                    <p class="text-gray-600 dark:text-gray-400">Optimize your operations and achieve more with less effort, consistently.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Body Section 2: Premium Features Designed for Excellence (Cards) -->
+    <section class="py-20 bg-white dark:bg-gray-800 transition-colors duration-500" id="features">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-12 fade-in dark:text-gray-200">Sophisticated Capabilities, Effortless Experience.</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <!-- Feature Card 1 -->
+                <div class="p-8 bg-gradient-to-br from-indigo-500 to-purple-600 text-white rounded-xl shadow-lg card-hover-effect fade-in card-scale-in icon-pulse-on-appear">
+                    <div class="flex items-center justify-center w-16 h-16 bg-white bg-opacity-20 rounded-full mb-6 mx-auto">
+                        <i class="fas fa-brain text-3xl text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold mb-3">Adaptive Learning Engine</h3>
+                    <p class="text-gray-200">Our AI continuously learns from your interactions, personalizing workflows and anticipating your needs for truly intelligent assistance.</p>
+                </div>
+                <!-- Feature Card 2 -->
+                <div class="p-8 bg-gradient-to-br from-purple-600 to-pink-500 text-white rounded-xl shadow-lg card-hover-effect fade-in card-scale-in icon-pulse-on-appear">
+                    <div class="flex items-center justify-center w-16 h-16 bg-white bg-opacity-20 rounded-full mb-6 mx-auto">
+                        <i class="fas fa-puzzle-piece text-3xl text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold mb-3">Cross-Platform Integration</h3>
+                    <p class="text-gray-200">Seamlessly connects with your existing tools and applications, creating a unified ecosystem for all your data and tasks.</p>
+                </div>
+                <!-- Feature Card 3 -->
+                <div class="p-8 bg-gradient-to-br from-pink-500 to-red-500 text-white rounded-xl shadow-lg card-hover-effect fade-in card-scale-in icon-pulse-on-appear">
+                    <div class="flex items-center justify-center w-16 h-16 bg-white bg-opacity-20 rounded-full mb-6 mx-auto">
+                        <i class="fas fa-chart-line text-3xl text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold mb-3">Advanced Analytics & Insights</h3>
+                    <p class="text-gray-200">Gain valuable, actionable insights from your data with AI-powered analysis, helping you make smarter decisions faster.</p>
+                </div>
+                <!-- Feature Card 4 -->
+                <div class="p-8 bg-gradient-to-br from-red-500 to-orange-500 text-white rounded-xl shadow-lg card-hover-effect fade-in card-scale-in icon-pulse-on-appear">
+                    <div class="flex items-center justify-center w-16 h-16 bg-white bg-opacity-20 rounded-full mb-6 mx-auto">
+                        <i class="fas fa-lock text-3xl text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold mb-3">Secure & Private</h3>
+                    <p class="text-gray-200">Your data security is our top priority. We employ robust encryption and privacy protocols to protect your information.</p>
+                </div>
+                <!-- Feature Card 5 -->
+                <div class="p-8 bg-gradient-to-br from-orange-500 to-yellow-500 text-white rounded-xl shadow-lg card-hover-effect fade-in card-scale-in icon-pulse-on-appear">
+                    <div class="flex items-center justify-center w-16 h-16 bg-white bg-opacity-20 rounded-full mb-6 mx-auto">
+                        <i class="fas fa-headset text-3xl text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold mb-3">24/7 Premium Support</h3>
+                    <p class="text-gray-200">Access dedicated support whenever you need it, ensuring a smooth and uninterrupted experience.</p>
+                </div>
+                <!-- Feature Card 6 -->
+                <div class="p-8 bg-gradient-to-br from-yellow-500 to-green-500 text-white rounded-xl shadow-lg card-hover-effect fade-in card-scale-in icon-pulse-on-appear">
+                    <div class="flex items-center justify-center w-16 h-16 bg-white bg-opacity-20 rounded-full mb-6 mx-auto">
+                        <i class="fas fa-cogs text-3xl text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold mb-3">Customizable Workflows</h3>
+                    <p class="text-gray-200">Tailor the AI Asesro to your exact needs with flexible and customizable automation workflows.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- New Section: How It Works -->
+    <section class="py-20 bg-gray-50 dark:bg-gray-900 transition-colors duration-500" id="how-it-works">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-12 fade-in dark:text-gray-200">How It Works: Simple Steps to AI-Powered Efficiency.</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <!-- Step 1 Card -->
+                <div class="p-8 bg-white rounded-xl shadow-lg card-hover-effect fade-in card-scale-in icon-pulse-on-appear dark:bg-gray-800 dark:text-gray-200">
+                    <div class="flex items-center justify-center w-16 h-16 bg-indigo-100 text-indigo-700 rounded-full mb-6 mx-auto font-bold text-3xl">1</div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3 dark:text-gray-100">Connect Your Tools</h3>
+                    <p class="text-gray-600 dark:text-gray-400">Easily integrate AI Asesro with your favorite apps and platforms in minutes.</p>
+                </div>
+                <!-- Step 2 Card -->
+                <div class="p-8 bg-white rounded-xl shadow-lg card-hover-effect fade-in card-scale-in icon-pulse-on-appear dark:bg-gray-800 dark:text-gray-200" style="animation-delay: 0.2s;">
+                    <div class="flex items-center justify-center w-16 h-16 bg-indigo-100 text-indigo-700 rounded-full mb-6 mx-auto font-bold text-3xl">2</div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3 dark:text-gray-100">Define Your Workflows</h3>
+                    <p class="text-gray-600 dark:text-gray-400">Use our intuitive interface to set up custom automation rules and preferences.</p>
+                </div>
+                <!-- Step 3 Card -->
+                <div class="p-8 bg-white rounded-xl shadow-lg card-hover-effect fade-in card-scale-in icon-pulse-on-appear dark:bg-gray-800 dark:text-gray-200" style="animation-delay: 0.4s;">
+                    <div class="flex items-center justify-center w-16 h-16 bg-indigo-100 text-indigo-700 rounded-full mb-6 mx-auto font-bold text-3xl">3</div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3 dark:text-gray-100">Experience Automation</h3>
+                    <p class="text-gray-600 dark:text-gray-400">Watch as AI Asesro intelligently handles tasks, freeing you to innovate.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- New Section: Why Choose AI Assesro? (Animated Counters) -->
+    <section class="py-20 bg-white dark:bg-gray-800 transition-colors duration-500" id="why-choose-us">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-8 fade-in dark:text-gray-200">Why Choose AI Asesro?</h2>
+            <p class="text-lg text-gray-600 max-w-4xl mx-auto mb-12 fade-in dark:text-gray-400">
+                We combine cutting-edge AI with a deep understanding of solopreneur and startup needs.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <!-- Counter Card 1: Founders Empowered -->
+                <div class="p-8 bg-white rounded-xl shadow-lg card-hover-effect fade-in card-scale-in dark:bg-gray-700">
+                    <div class="text-5xl md:text-6xl font-extrabold text-green-600 mb-3 counter-value" data-target="5000" data-prefix="" data-suffix="+">0</div>
+                    <p class="text-lg font-semibold text-gray-900 dark:text-gray-100">Founders Empowered</p>
+                </div>
+                <!-- Counter Card 2: Faster Execution -->
+                <div class="p-8 bg-white rounded-xl shadow-lg card-hover-effect fade-in card-scale-in dark:bg-gray-700">
+                    <div class="text-5xl md:text-6xl font-extrabold text-green-600 mb-3 counter-value" data-target="60" data-prefix="" data-suffix="%">0</div>
+                    <p class="text-lg font-semibold text-gray-900 dark:text-gray-100">Faster Execution</p>
+                </div>
+                <!-- Counter Card 3: Automation Accuracy -->
+                <div class="p-8 bg-white rounded-xl shadow-lg card-hover-effect fade-in card-scale-in dark:bg-gray-700">
+                    <div class="text-5xl md:text-6xl font-extrabold text-green-600 mb-3 counter-value" data-target="99.9" data-prefix="" data-suffix="%">0</div>
+                    <p class="text-lg font-semibold text-gray-900 dark:text-gray-100">Automation Accuracy</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Body Section 3: Experience the Difference - Use Cases -->
+    <section class="py-20 bg-gray-50 dark:bg-gray-900 transition-colors duration-500" id="use-cases">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-12 fade-in dark:text-gray-200">Transform Your Day: Real-World Applications.</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
+                <!-- Use Case 1 -->
+                <div class="p-6 bg-white rounded-xl shadow-md card-hover-effect fade-in card-scale-in icon-pulse-on-appear dark:bg-gray-800 dark:text-gray-200">
+                    <i class="fas fa-briefcase text-4xl text-indigo-600 mb-4"></i>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2 dark:text-gray-100">Business Automation</h3>
+                    <p class="text-gray-600 text-sm dark:text-gray-400">Streamline operations, automate reports, and manage projects effortlessly.</p>
+                </div>
+                <!-- Use Case 2 -->
+                <div class="p-6 bg-white rounded-xl shadow-md card-hover-effect fade-in card-scale-in icon-pulse-on-appear dark:bg-gray-800 dark:text-gray-200">
+                    <i class="fas fa-user-check text-4xl text-indigo-600 mb-4"></i>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2 dark:text-gray-100">Personal Productivity</h3>
+                    <p class="text-gray-600 text-sm dark:text-gray-400">Organize schedules, manage communications, and set smart reminders.</p>
+                </div>
+                <!-- Use Case 3 -->
+                <div class="p-6 bg-white rounded-xl shadow-md card-hover-effect fade-in card-scale-in icon-pulse-on-appear dark:bg-gray-800 dark:text-gray-200">
+                    <i class="fas fa-paint-brush text-4xl text-indigo-600 mb-4"></i>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2 dark:text-gray-100">Creative Support</h3>
+                    <p class="text-gray-600 text-sm dark:text-gray-400">Brainstorm ideas, generate content outlines, and research topics efficiently.</p>
+                </div>
+                <!-- Use Case 4 -->
+                <div class="p-6 bg-white rounded-xl shadow-md card-hover-effect fade-in card-scale-in icon-pulse-on-appear dark:bg-gray-800 dark:text-gray-200">
+                    <i class="fas fa-database text-4xl text-indigo-600 mb-4"></i>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2 dark:text-gray-100">Data Management</h3>
+                    <p class="text-gray-600 text-sm dark:text-gray-400">Effortlessly categorize, analyze, and retrieve information with precision.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Body Section 4: Testimonials Carousel -->
+    <section class="py-20 bg-white dark:bg-gray-800 transition-colors duration-500" id="testimonials">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-12 fade-in dark:text-gray-200">What Our Users Say.</h2>
+            <div class="testimonial-carousel relative max-w-2xl mx-auto">
+                <div class="testimonial-wrapper" id="testimonial-wrapper">
+                    <!-- Testimonial 1 -->
+                    <div class="testimonial-card p-8 bg-gray-100 rounded-xl shadow-md dark:bg-gray-700">
+                        <p class="text-lg text-gray-700 italic mb-6 dark:text-gray-200">
+                            "Since integrating AI Asesro, our team's efficiency has skyrocketed. It's like having an extra team member working 24/7!"
+                        </p>
+                        <div class="flex items-center justify-center">
+                            <img src="https://placehold.co/64x64/E0E7FF/4F46E5?text=SS" alt="Sanjay Sharma" class="w-16 h-16 rounded-full mr-4 border-2 border-indigo-600">
+                            <div>
+                                <p class="font-semibold text-gray-900 dark:text-gray-100"> Sanjay Sharma</p>
+                                <p class="text-sm text-gray-600 dark:text-gray-400">Digital Coach.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Testimonial 2 -->
+                    <div class="testimonial-card p-8 bg-gray-100 rounded-xl shadow-md dark:bg-gray-700">
+                        <p class="text-lg text-gray-700 italic mb-6 dark:text-gray-200">
+                            "The adaptive learning engine is a game-changer. AI Asesro truly understands our needs and automates tasks flawlessly."
+                        </p>
+                        <div class="flex items-center justify-center">
+                            <img src="https://placehold.co/64x64/E0E7FF/4F46E5?text=AM" alt="Abhishek Malhotra" class="w-16 h-16 rounded-full mr-4 border-2 border-indigo-600">
+                            <div>
+                                <p class="font-semibold text-gray-900 dark:text-gray-100">Abhishek Malhotra</p>
+                                <p class="text-sm text-gray-600 dark:text-gray-400">Tech Master</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Testimonial 3 -->
+                    <div class="testimonial-card p-8 bg-gray-100 rounded-xl shadow-md dark:bg-gray-700">
+                        <p class="text-lg text-gray-700 italic mb-6 dark:text-gray-200">
+                            "AI Asesro has revolutionized how we handle data. The accuracy and speed are simply unmatched. Highly recommended!"
+                        </p>
+                        <div class="flex items-center justify-center">
+                            <img src="https://placehold.co/64x64/E0E7FF/4F46E5?text=AM" alt="Rudra Shetty" class="w-16 h-16 rounded-full mr-4 border-2 border-indigo-600">
+                            <div>
+                                <p class="font-semibold text-gray-900 dark:text-gray-100">Rudra Shetty</p>
+                                <p class="text-sm text-gray-600 dark:text-gray-400">Operations Manager, Future Corp</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Carousel Navigation Buttons -->
+                <button class="carousel-button left" onclick="moveTestimonial(-1)">&#10094;</button>
+                <button class="carousel-button right" onclick="moveTestimonial(1)">&#10095;</button>
+                <!-- Carousel Dots -->
+                <div class="carousel-dots" id="carousel-dots"></div>
+            </div>
+        </div>
+    </section>
+
+    
+
+    <!-- New Section: Frequently Asked Questions (FAQ) -->
+    <section class="py-20 bg-white dark:bg-gray-800 transition-colors duration-500" id="faq">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-12 fade-in dark:text-gray-200">Frequently Asked Questions</h2>
+            <div class="max-w-3xl mx-auto space-y-4">
+                <!-- FAQ Item 1 -->
+                <div class="bg-white rounded-xl shadow-md dark:bg-gray-800 fade-in card-scale-in">
+                    <button class="faq-item-header w-full flex justify-between items-center p-6 text-lg font-semibold text-left text-gray-900 dark:text-gray-100 focus:outline-none" aria-expanded="false">
+                        What is AI Asesro and how does it work?
+                        <i class="fas fa-chevron-down transform transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-item-content px-6 pb-6 hidden text-gray-700 dark:text-gray-300">
+                        AI Asesro is a premium AI co-pilot designed to automate tasks, provide intelligent insights, and boost productivity. It uses advanced machine learning to learn your workflows and adapt to your needs, offering seamless integration with your existing tools.
+                    </div>
+                </div>
+                <!-- FAQ Item 2 -->
+                <div class="bg-white rounded-xl shadow-md dark:bg-gray-800 fade-in card-scale-in" style="animation-delay: 0.1s;">
+                    <button class="faq-item-header w-full flex justify-between items-center p-6 text-lg font-semibold text-left text-gray-900 dark:text-gray-100 focus:outline-none" aria-expanded="false">
+                        Is my data secure with AI Asesro?
+                        <i class="fas fa-chevron-down transform transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-item-content px-6 pb-6 hidden text-gray-700 dark:text-gray-300">
+                        Absolutely. We prioritize your data security and privacy. AI Assessor employs robust encryption and adheres to strict privacy protocols to ensure your information is always protected.
+                    </div>
+                </div>
+                <!-- FAQ Item 3 -->
+                <div class="bg-white rounded-xl shadow-md dark:bg-gray-800 fade-in card-scale-in" style="animation-delay: 0.2s;">
+                    <button class="faq-item-header w-full flex justify-between items-center p-6 text-lg font-semibold text-left text-gray-900 dark:text-gray-100 focus:outline-none" aria-expanded="false">
+                        Can I customize AI Asesro to my specific needs?
+                        <i class="fas fa-chevron-down transform transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-item-content px-6 pb-6 hidden text-gray-700 dark:text-gray-300">
+                        Yes, AI Asesro offers highly customizable workflows. You can tailor the automation rules and preferences to perfectly align with your unique business or personal requirements.
+                    </div>
+                </div>
+                <!-- FAQ Item 4 -->
+                <div class="bg-white rounded-xl shadow-md dark:bg-gray-800 fade-in card-scale-in" style="animation-delay: 0.3s;">
+                    <button class="faq-item-header w-full flex justify-between items-center p-6 text-lg font-semibold text-left text-gray-900 dark:text-gray-100 focus:outline-none" aria-expanded="false">
+                        Do you offer a free trial?
+                        <i class="fas fa-chevron-down transform transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-item-content px-6 pb-6 hidden text-gray-700 dark:text-gray-300">
+                        Yes, we offer a free trial so you can experience the full power of AI Assessor without any commitment. No credit card is required to get started.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Section (Before Footer) -->
+    <section class="py-20 bg-indigo-700 text-white text-center">
+        <div class="container mx-auto px-6 fade-in">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">Ready to Transform Your Workflow?</h2>
+            <p class="text-lg mb-10 max-w-3xl mx-auto opacity-90">
+                Join thousands of professionals who are already experiencing unparalleled efficiency with AI Assessor.
+            </p>
+            <a href="#" class="bg-white text-indigo-700 px-10 py-5 rounded-full text-xl font-bold shadow-xl hover:bg-gray-100 transition duration-300 btn-primary">
+                Coming Soon
+            </a>
+            <p class="text-sm mt-4 opacity-80">No credit card required. Cancel anytime.</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-300 py-12 transition-colors duration-500" id="contact">
+        <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
+            <!-- About -->
+            <div>
+                <h3 class="text-xl font-semibold text-white mb-4">AI Asesro</h3>
+                <p class="text-sm">Your trusted AI co-pilot for intelligent automation and enhanced productivity.</p>
+            </div>
+            <!-- Quick Links -->
+            <div>
+                <h3 class="text-xl font-semibold text-white mb-4">Quick Links</h3>
+                <ul class="space-y-2">
+                    <li><a href="#features" class="hover:text-white transition duration-300">Features</a></li>
+                    <li><a href="#how-it-works" class="hover:text-white transition duration-300">How It Works</a></li>
+                    <li><a href="#why-choose-us" class="hover:text-white transition duration-300">Why Choose Us?</a></li>
+                    <li><a href="#use-cases" class="hover:text-white transition duration-300">Use Cases</a></li>
+                    <li><a href="#testimonials" class="hover:text-white transition duration-300">Testimonials</a></li>
+                    <li><a href="#faq" class="hover:text-white transition duration-300">FAQ</a></li>
+                </ul>
+            </div>
+            <!-- Contact & Newsletter -->
+            <!-- Contact & Newsletter -->
+<div>
+    <h3 class="text-xl font-semibold text-white mb-4">Contact Us</h3>
+    <p class="text-sm mb-4">Have questions? Reach out to us directly or subscribe to our newsletter.</p>
+
+    <!-- ✅ Contact Form -->
+    <form action="https://formspree.io/f/xzzvbzra" method="POST" class="flex flex-col gap-4 mb-6">
+        <input type="text" name="name" placeholder="Your Name" class="p-3 rounded-md text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
+        <input type="email" name="email" placeholder="Your Email" class="p-3 rounded-md text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
+        <textarea name="message" placeholder="Your Message" rows="4" class="p-3 rounded-md text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500" required></textarea>
+        
+        <!-- ✅ Optional Redirect -->
+        <input type="hidden" name="_redirect" value="https://ai-asesro.in/thankyou.html">
+        
+        <button type="submit" class="bg-indigo-600 text-white p-3 rounded-md font-semibold hover:bg-indigo-700 transition duration-300 btn-primary">Send Message</button>
+    </form>
+
+    <h3 class="text-xl font-semibold text-white mb-4">Stay Connected</h3>
+
+    <!-- ✅ Newsletter Form -->
+    <form action="https://formspree.io/f/xzzvbzra" method="POST" class="flex flex-col sm:flex-row gap-2 mb-4">
+        <input type="email" name="email" placeholder="Your email for newsletter" class="p-3 rounded-md flex-grow text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
+        
+        <!-- Optional Redirect -->
+        <input type="hidden" name="_redirect" value="https://ai-asesro.in/thankyou.html">
+        
+        <button type="submit" class="bg-indigo-600 text-white p-3 rounded-md font-semibold hover:bg-indigo-700 transition duration-300 btn-primary">Subscribe</button>
+    </form>
+
+    <div class="flex justify-center md:justify-start space-x-4">
+        <a href="#" class="text-gray-300 hover:text-white transition duration-300 social-icon-bounce"><i class="fab fa-linkedin text-2xl"></i></a>
+        <a href="#" class="text-gray-300 hover:text-white transition duration-300 social-icon-bounce"><i class="fab fa-twitter text-2xl"></i></a>
+        <a href="https://facebook.com/ai.asesro" class="text-gray-300 hover:text-white transition duration-300 social-icon-bounce"><i class="fab fa-facebook text-2xl"></i></a>
+        <a href="https://instagram.com/ai.asesro" class="text-gray-300 hover:text-white transition duration-300 social-icon-bounce"><i class="fab fa-instagram text-2xl"></i></a>
+    </div>
+</div>
+
+<!-- Footer Bottom -->
+</div>
+<div class="mt-10 border-t border-gray-700 pt-8 text-center text-sm text-gray-500">
+    &copy; 2025 AI Assessor. All rights reserved. | <a href="#" class="hover:text-gray-400">Privacy Policy</a> | <a href="#" class="hover:text-gray-400">Terms of Service</a>
+</div>
+</footer>
+
+<!-- Back to Top Button -->
+<button id="back-to-top" class="rounded-full p-4 focus:outline-none hover:bg-indigo-700 transition duration-300">
+    <i class="fas fa-arrow-up text-xl"></i>
+</button>
+
+    <script>
+// ========== MOBILE MENU TOGGLE ==========
+const mobileMenu = document.getElementById('mobile-menu');
+const mobileMenuButton = document.getElementById('mobile-menu-button');
+const closeMobileMenu = document.getElementById('close-mobile-menu');
+
+mobileMenuButton?.addEventListener('click', () => mobileMenu.classList.remove('hidden'));
+closeMobileMenu?.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+
+// ========== DARK/LIGHT MODE ==========
+const htmlElement = document.documentElement;
+const themeToggle = document.getElementById('theme-toggle');
+const themeToggleMobile = document.getElementById('theme-toggle-mobile');
+
+function setTheme(theme) {
+    htmlElement.className = theme;
+    localStorage.setItem('theme', theme);
+}
+
+const savedTheme = localStorage.getItem('theme');
+setTheme(savedTheme || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
+
+[themeToggle, themeToggleMobile].forEach(toggle => {
+    toggle?.addEventListener('click', () => {
+        htmlElement.classList.toggle('dark');
+        htmlElement.classList.toggle('light');
+        localStorage.setItem('theme', htmlElement.className);
+    });
+});
+
+// ========== SCROLL ANIMATIONS ==========
+const observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('appear');
+            if (entry.target.classList.contains('icon-pulse-on-appear')) {
+                const icon = entry.target.querySelector('i');
+                if (icon) {
+                    icon.style.animation = 'none';
+                    void icon.offsetWidth;
+                    icon.style.animation = 'icon-pulse 1s ease-out';
+                }
+            }
+            observer.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.fade-in, .card-scale-in, .icon-pulse-on-appear').forEach(el => observer.observe(el));
+
+// ========== COUNTER ON SCROLL ==========
+const counterObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting && !entry.target.classList.contains('counted')) {
+            const el = entry.target;
+            const target = parseFloat(el.dataset.target);
+            const prefix = el.dataset.prefix || '';
+            const suffix = el.dataset.suffix || '';
+            let current = 0;
+            const duration = 2000;
+            const increment = target / (duration / 16);
+
+            const animate = () => {
+                current += increment;
+                if (current < target) {
+                    el.textContent = prefix + (target % 1 ? current.toFixed(1) : Math.floor(current)) + suffix;
+                    requestAnimationFrame(animate);
+                } else {
+                    el.textContent = prefix + target + suffix;
+                    el.classList.add('counted');
+                }
+            };
+            animate();
+            observer.unobserve(el);
+        }
+    });
+}, { threshold: 0.5 });
+
+document.querySelectorAll('.counter-value').forEach(el => counterObserver.observe(el));
+
+// ========== FAQ ACCORDION ==========
+document.querySelectorAll('.faq-item-header').forEach(button => {
+    button.addEventListener('click', () => {
+        const content = button.nextElementSibling;
+        const icon = button.querySelector('i');
+
+        document.querySelectorAll('.faq-item-header').forEach(other => {
+            if (other !== button && other.getAttribute('aria-expanded') === 'true') {
+                other.setAttribute('aria-expanded', 'false');
+                other.nextElementSibling.classList.add('hidden');
+                other.querySelector('i').classList.remove('rotate-180');
+            }
+        });
+
+        const expanded = button.getAttribute('aria-expanded') === 'true';
+        button.setAttribute('aria-expanded', String(!expanded));
+        content.classList.toggle('hidden', expanded);
+        icon.classList.toggle('rotate-180', !expanded);
+    });
+});
+
+// ========== TESTIMONIAL CAROUSEL ==========
+const testimonialWrapper = document.getElementById('testimonial-wrapper');
+const testimonialCards = document.querySelectorAll('.testimonial-card');
+const carouselDotsContainer = document.getElementById('carousel-dots');
+let currentIndex = 0;
+let autoPlayInterval;
+
+testimonialCards.forEach((_, i) => {
+    const dot = document.createElement('span');
+    dot.classList.add('dot');
+    dot.addEventListener('click', () => {
+        currentIndex = i;
+        updateCarousel();
+        resetAutoPlay();
+    });
+    carouselDotsContainer.appendChild(dot);
+});
+
+function updateCarousel() {
+    testimonialWrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
+    document.querySelectorAll('.dot').forEach((dot, i) => dot.classList.toggle('active', i === currentIndex));
+}
+
+window.moveTestimonial = (dir) => {
+    currentIndex = (currentIndex + dir + testimonialCards.length) % testimonialCards.length;
+    updateCarousel();
+    resetAutoPlay();
+};
+
+function startAutoPlay() {
+    autoPlayInterval = setInterval(() => moveTestimonial(1), 5000);
+}
+function resetAutoPlay() {
+    clearInterval(autoPlayInterval);
+    startAutoPlay();
+}
+testimonialWrapper.parentElement.addEventListener('mouseenter', () => clearInterval(autoPlayInterval));
+testimonialWrapper.parentElement.addEventListener('mouseleave', startAutoPlay);
+updateCarousel();
+startAutoPlay();
+
+// ========== BACK TO TOP BUTTON ==========
+const backToTopButton = document.getElementById('back-to-top');
+window.addEventListener('scroll', () => {
+    backToTopButton.classList.toggle('show', window.scrollY > 300);
+});
+backToTopButton.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+// ========== AI DEMO SIMULATION ==========
+const aiInput = document.getElementById('ai-input');
+const aiProcessButton = document.getElementById('ai-process-button');
+const aiLoading = document.getElementById('ai-loading');
+const aiDemoOutput = document.getElementById('ai-demo-output');
+
+const aiResponses = {
+    "schedule meeting": "AI Asesro: Your meeting is scheduled for tomorrow at 10 AM. Smart coordination, done.",
+    "write email": "AI Asesro: Email drafted for ‘Project X Update’. It’s clear, polished, and ready.",
+    "summarize document": "AI Asesro: Summary complete. We extracted the insights so you don’t have to.",
+    "analyze data": "AI Asesro: Your data is decoded. Trends and outliers now crystal clear.",
+    "create report": "AI Asesro: Your custom report is ready. Precision delivered to your dashboard.",
+    "default": "AI Asesro processed your request: “[Your input]”. Your AI co-founder gets things done."
+};
+
+aiProcessButton?.addEventListener('click', async () => {
+    const input = aiInput.value.trim().toLowerCase();
+    if (!input) {
+        aiDemoOutput.innerHTML = `<p class="text-red-500">Please enter a task or question.</p>`;
+        return;
+    }
+
+    aiLoading.classList.remove('hidden');
+    aiDemoOutput.textContent = 'Processing your request...';
+    aiDemoOutput.classList.remove('typing-animation');
+    await new Promise(resolve => setTimeout(resolve, 1500));
+
+    aiLoading.classList.add('hidden');
+    let responseText = aiResponses[Object.keys(aiResponses).find(key => input.includes(key))] || aiResponses.default.replace('[Your input]', input);
+
+    aiDemoOutput.innerHTML = '';
+    aiDemoOutput.classList.add('typing-animation');
+
+    let i = 0;
+    const typeWriter = () => {
+        if (i < responseText.length) {
+            aiDemoOutput.innerHTML += responseText.charAt(i);
+            i++;
+            setTimeout(typeWriter, 30);
+        } else {
+            aiDemoOutput.classList.remove('typing-animation');
+        }
+    };
+    typeWriter();
+});
+</script>
+</body>
+</html>
