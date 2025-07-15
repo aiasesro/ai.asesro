@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Join Our Exclusive Waiting List - AI Asesro</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
+
+  <style>
+    body { font-family: 'Inter', sans-serif; overflow-x: hidden; transition: background 0.5s ease, color 0.5s ease; }
+    html.dark body { background-color: #1a202c; color: #e2e8f0; }
+    html.light body { background-color: #f9fafb; color: #374151; }
+    html.dark .bg-white { background-color: #2d3748; }
+    html.dark .text-gray-600 { color: #a0aec0; }
+
+    .waiting-list-bg {
+      background: linear-gradient(135deg, #e0e7ff, #c7d2fe);
+      background-size: 400% 400%;
+      animation: gradientAnimation 12s ease infinite;
+    }
+
+    @keyframes gradientAnimation {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .success-message-appear {
+      animation: slideInUp 0.5s ease-out forwards;
+    }
+
+    @keyframes slideInUp {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .countdown-item {
+      display: inline-block;
+      margin: 0 0.5rem;
+      text-align: center;
+      font-size: 1.25rem;
+      font-weight: bold;
+      color: #4f46e5;
+    }
+
+    .countdown-item span {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: normal;
+      color: #6b7280;
+      margin-top: 0.25rem;
+    }
+  </style>
+</head>
+
+<body class="min-h-screen flex flex-col bg-gray-50 text-gray-800">
+
+<!-- Header -->
+<header class="py-4 px-6 bg-white shadow-sm">
+  <nav class="container mx-auto flex justify-between items-center">
+    <a class="text-2xl font-bold text-indigo-600" href="#">AI Asesro</a>
+    <button id="theme-toggle" class="text-2xl text-gray-600 dark:text-gray-300"><i class="fas fa-sun"></i></button>
+  </nav>
+</header>
+
+<!-- Main -->
+<main class="flex-grow flex items-center justify-center py-10 waiting-list-bg px-4">
+  <div class="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-xl max-w-md w-full text-center">
+    <h1 class="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Join Our Exclusive Waiting List!</h1>
+    <p class="text-gray-600 dark:text-gray-400 mb-6">
+      Secure your spot for early access to AI Asesro's revolutionary features.
+    </p>
+
+    <!-- Countdown -->
+    <div class="mb-6 p-4 bg-indigo-100 dark:bg-indigo-900 rounded-lg">
+      <p class="text-indigo-700 dark:text-indigo-300 font-semibold mb-2">Early Access Ends In:</p>
+      <div id="countdown" class="flex justify-center space-x-4 mb-3">
+        <div class="countdown-item"><span id="days">00</span><span>Days</span></div>
+        <div class="countdown-item"><span id="hours">00</span><span>Hours</span></div>
+        <div class="countdown-item"><span id="minutes">00</span><span>Minutes</span></div>
+        <div class="countdown-item"><span id="seconds">00</span><span>Seconds</span></div>
+      </div>
+      <p class="font-bold text-indigo-800 dark:text-indigo-300">
+        <i class="fas fa-users mr-2"></i>
+        <span id="people-joined-count">0</span> people have already joined!
+      </p>
+    </div>
+
+    <!-- Form -->
+    <form id="waitingListForm" class="space-y-4">
+      <input type="text" id="name" placeholder="Full Name" required
+             class="w-full px-4 py-3 rounded-md border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+      <input type="email" id="email" placeholder="Email Address" required
+             class="w-full px-4 py-3 rounded-md border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+      <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-3 rounded-full font-semibold">
+        Pre-Register Now
+      </button>
+    </form>
+
+    <!-- Success Message -->
+    <div id="successMessage" class="hidden mt-6 p-4 bg-green-100 text-green-800 rounded-md dark:bg-green-700 dark:text-white">
+      <i class="fas fa-check-circle mr-2"></i>
+      Successfully registered! You'll get launch info soon.
+    </div>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="text-center py-6 text-sm text-gray-500 dark:text-gray-400">
+  &copy; 2025 AI Asesro. All rights reserved.
+</footer>
+
+<!-- Firebase SDKs -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyAQOlrFwKHa07L8LJ5IRc53XaZLMfQyKSk",
+    authDomain: "ai-asesro-waitlist.firebaseapp.com",
+    projectId: "ai-asesro-waitlist",
+    storageBucket: "ai-asesro-waitlist.firebasestorage.app",
+    messagingSenderId: "550218380439",
+    appId: "1:550218380439:web:8783c53396fd7e982165d2",
+    measurementId: "G-V741MBGXCX"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  // Dark mode toggle
+  const themeToggle = document.getElementById('theme-toggle');
+  themeToggle.onclick = () => {
+    document.documentElement.classList.toggle('dark');
+  };
+
+  // Countdown Timer
+  const countdownDate = new Date();
+  countdownDate.setDate(countdownDate.getDate() + 7);
+
+  setInterval(() => {
+    const now = new Date().getTime();
+    const distance = countdownDate.getTime() - now;
+
+    const d = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const s = Math.floor((distance % (1000 * 60)) / 1000);
+
+    document.getElementById("days").innerText = d.toString().padStart(2, '0');
+    document.getElementById("hours").innerText = h.toString().padStart(2, '0');
+    document.getElementById("minutes").innerText = m.toString().padStart(2, '0');
+    document.getElementById("seconds").innerText = s.toString().padStart(2, '0');
+  }, 1000);
+
+  // Simulated "people joined"
+  let joined = 1278;
+  const max = 1350;
+  const joinedSpan = document.getElementById("people-joined-count");
+
+  setInterval(() => {
+    if (joined < max) {
+      joined += Math.floor(Math.random() * 5) + 1;
+      if (joined > max) joined = max;
+      joinedSpan.innerText = joined.toLocaleString();
+    }
+  }, 2000);
+
+  // Form Submission
+  const form = document.getElementById("waitingListForm");
+  const successMessage = document.getElementById("successMessage");
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+
+    try {
+      await addDoc(collection(db, "waitingList"), {
+        name,
+        email,
+        createdAt: new Date()
+      });
+      successMessage.classList.remove("hidden");
+      form.reset();
+      setTimeout(() => successMessage.classList.add("hidden"), 7000);
+    } catch (err) {
+      alert("❌ Failed to register: " + err.message);
+    }
+  });
+</script>
+</body>
+</html>
